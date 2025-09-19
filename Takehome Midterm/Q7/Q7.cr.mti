@@ -1,0 +1,9 @@
+{D:/Term 4/DSD/tamrin/midterm/Q7/top.v} {1 {vlog -work work {D:\Term 4\DSD\tamrin\midterm\Q7\top.v}
+Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
+-- Compiling module manchester_carry_chain_adder
+-- Compiling module testbench
+
+Top level modules:
+	testbench
+
+} {} {}}

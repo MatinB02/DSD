@@ -1,0 +1,81 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\altera\13.0sp1
+vpwm_ramp
+!i10b 1
+!s100 fW510SB??neD@8e;eS=ZS3
+Ihl1GGEW?0UXlfZ[aCCb]Z3
+Z1 Vb:@8g3^c:;eAg^S_A8oG13
+Z2 dD:\Term 4\DSD\tamrin\midterm\Q4
+Z3 w1747409070
+Z4 8D:\Term 4\DSD\tamrin\midterm\Q4\top.v
+Z5 FD:\Term 4\DSD\tamrin\midterm\Q4\top.v
+L0 1
+Z6 OV;L;10.1d;51
+r1
+!s85 0
+31
+Z7 !s108 1747636447.093000
+Z8 !s107 D:\Term 4\DSD\tamrin\midterm\Q4\top.v|
+Z9 !s90 -reportprogress|300|-work|work|D:\Term 4\DSD\tamrin\midterm\Q4\top.v|
+!s101 -O0
+Z10 o-work work -O0
+vpwm_ramp_generator
+Z11 !s100 >CADUPaDY:j]6mDmKEbYn0
+Z12 IJk3^l6nQ_c614C=N@[OnM2
+Z13 VmB5b1YaGQgZk1WJ;aBPki0
+R2
+Z14 w1747401830
+Z15 8D:/Term 4/DSD/tamrin/midterm/Q4/top.v
+Z16 FD:/Term 4/DSD/tamrin/midterm/Q4/top.v
+Z17 L0 160
+R6
+r1
+31
+Z18 !s108 1747401837.231000
+Z19 !s107 D:/Term 4/DSD/tamrin/midterm/Q4/top.v|
+Z20 !s90 -reportprogress|300|-work|work|D:/Term 4/DSD/tamrin/midterm/Q4/top.v|
+R10
+!i10b 1
+!s85 0
+!s101 -O0
+vpwm_tb
+!i10b 1
+!s100 XK_6giNc>zcleI^lBm1j31
+IfzF@l@E[Z]=;T^D;K2>[;0
+Z21 V9N`UQHZbKjRKn56`R?0D00
+R2
+R3
+R4
+R5
+L0 45
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!s101 -O0
+R10
+vtb_pwm_ramp
+Z22 !s100 ZVH=>i:MD]?LKOdWh[nzI0
+Z23 IL4S9Yf_gOYVeTB2TBeN2k2
+Z24 VD;VZD1^SBj6C2:7z?ob<z1
+R2
+R14
+R15
+R16
+Z25 L0 208
+R6
+r1
+31
+R18
+R19
+R20
+R10
+!i10b 1
+!s85 0
+!s101 -O0

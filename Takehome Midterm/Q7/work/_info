@@ -1,0 +1,119 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\altera\13.0sp1
+vcarry_stage
+Z1 IafDI3Xl:9W@FP7z_:T85>1
+Z2 V?d]Em2Tnzm6^jG0b]9Fhl0
+Z3 dD:\Term 4\DSD\tamrin\midterm\Q7
+Z4 w1747325839
+Z5 8D:/Term 4/DSD/tamrin/midterm/Q7/top.v
+Z6 FD:/Term 4/DSD/tamrin/midterm/Q7/top.v
+L0 38
+Z7 OV;L;10.1d;51
+r1
+31
+Z8 !s108 1747325839.716000
+Z9 !s107 D:/Term 4/DSD/tamrin/midterm/Q7/top.v|
+Z10 !s90 -reportprogress|300|-work|work|D:/Term 4/DSD/tamrin/midterm/Q7/top.v|
+Z11 o-work work -O0
+Z12 !s100 n@:cAN@5lj5`CJ0HSDIYN2
+!i10b 1
+!s85 0
+!s101 -O0
+vmanchester_carry_chain_adder
+!i10b 1
+!s100 <7015XTIzGQ^_]mATUP282
+I:R`h>m[O`9IAM0lPY]=[R3
+Z13 VPW^?_IlDa<k3UTSoUb7zH2
+R3
+Z14 w1747417064
+Z15 8top.v
+Z16 Ftop.v
+L0 1
+R7
+r1
+!s85 0
+31
+Z17 !s108 1747419693.995000
+Z18 !s107 top.v|
+Z19 !s90 -reportprogress|300|top.v|
+!s101 -O0
+o-O0
+vmanchester_carry_chain_adder_tb
+Z20 Ihnh7Qk8=AH<Z`YYBamU6G1
+Z21 V]8QggR;[Sl5049WFgdeLb1
+R3
+Z22 w1747330997
+R5
+R6
+L0 35
+R7
+r1
+31
+Z23 !s108 1747331002.831000
+R9
+R10
+R11
+Z24 !s100 G1zVgZa_g3i=[h9I@Rm811
+!i10b 1
+!s85 0
+!s101 -O0
+vmm
+Z25 !s100 IN3cThd9LCdgN7_bzam_@0
+Z26 IFYmjj@PbEC64UKldbEG:i0
+Z27 V]^7250J[UMFm7zAXzzXVP0
+R3
+Z28 w1747417018
+Z29 8D:\Term 4\DSD\tamrin\midterm\Q7\top.v
+Z30 FD:\Term 4\DSD\tamrin\midterm\Q7\top.v
+Z31 L0 129
+R7
+r1
+31
+Z32 !s108 1747417038.960000
+Z33 !s107 D:\Term 4\DSD\tamrin\midterm\Q7\top.v|
+Z34 !s90 -reportprogress|300|-work|work|D:\Term 4\DSD\tamrin\midterm\Q7\top.v|
+R11
+!i10b 1
+!s85 0
+!s101 -O0
+vtb
+Z35 !s100 B>YB=RTgI3ZZ2fF9WPj890
+Z36 IIYeaddDRiLaC>15G36KiE1
+Z37 VV@Xn<HnSRM[I5c1?BH]3a3
+R3
+R28
+R29
+R30
+Z38 L0 148
+R7
+r1
+31
+R32
+R33
+R34
+R11
+!i10b 1
+!s85 0
+!s101 -O0
+vtestbench
+!i10b 1
+!s100 D82JV>On``^A]E^1AJkz30
+I?R[Ia5g?OF@Q4;2bkTo^c0
+Z39 VhGfW:390DM[oDMzegDH9`2
+R3
+R14
+R15
+R16
+L0 37
+R7
+r1
+!s85 0
+31
+R17
+R18
+R19
+!s101 -O0
+o-O0

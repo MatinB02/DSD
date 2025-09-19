@@ -1,0 +1,185 @@
+module manchester_carry_chain_adder (
+    input [15:0] a, b,
+    input Cin,
+    output [15:0] Sum,
+    output Cout
+);
+    wire [15:0] p, g;
+    wire [16:0] carry;
+
+    // Cin is the initial carry
+    buf (carry[0], Cin);
+
+    genvar i;
+    generate
+        for (i = 0; i < 16; i = i + 1) begin: stage
+
+            // Propagate and Generate signals
+            xor (p[i], a[i], b[i]);
+            and (g[i], a[i], b[i]);
+            // Sum generation
+            xor (Sum[i], p[i], carry[i]); // Sum is P XOR Carry-in
+
+            nmos(carry[i+1], carry[i], p[i]);
+            pmos(carry[i+1], g[i], p[i]);
+          
+        end
+    endgenerate
+
+    buf (Cout, carry[16]);
+endmodule
+
+
+`timescale 1ns/1ps
+
+module testbench;
+    reg [15:0] a, b;
+    reg Cin;
+    wire [15:0] Sum;
+    wire Cout;
+    
+    // Instantiate
+    manchester_carry_chain_adder dut (.a(a), .b(b), .Cin(Cin), .Sum(Sum), .Cout(Cout));
+    
+    reg [16:0] expected_sum; // 17 bits to include carry out
+    integer random_correct = 0;
+    integer edge_correct = 0;
+    integer total_tests = 0;
+    integer i;
+    
+    // Test task
+    task test_case;
+        input [15:0] a_val, b_val;
+        input cin_val;
+        input is_edge_case;
+        begin
+            a = a_val;
+            b = b_val;
+            Cin = cin_val;
+            expected_sum = a + b + Cin;
+            
+            #1; // Allow time for signals to propagate
+            
+            total_tests = total_tests + 1;
+            
+            if ({Cout, Sum} === expected_sum) begin
+                if (is_edge_case) edge_correct = edge_correct + 1;
+                else random_correct = random_correct + 1;
+                
+                $display("Test %0d: PASS - %h + %h + %b = %h (Cout=%b) [Expected: %h]",
+                         total_tests, a, b, Cin, Sum, Cout, expected_sum);
+            end
+            else begin
+                $display("Test %0d: FAIL - %h + %h + %b = %h (Cout=%b) [Expected: %h]",
+                         total_tests, a, b, Cin, Sum, Cout, expected_sum);
+            end
+        end
+    endtask
+    
+    // Main test
+    initial begin
+        $display("Starting Manchester Carry Chain Adder Test Bench");
+        $display("------------------------------------------------");
+        
+        $display("\nRunning 50 Random Test Cases:");
+        // Random test cases
+        for (i = 0; i < 50; i = i + 1) begin
+            test_case($random, $random, $random % 2, 0);
+        end
+        $display("\nRandom Test Cases Summary:");
+        $display("Correct: %0d/50", random_correct);
+        
+        $display("\nRunning 10 Edge Cases:");
+        
+        test_case(16'h0000, 16'h0000, 1'b0, 1);// Edge Case 1: All zeros
+        
+        test_case(16'hFFFF, 16'hFFFF, 1'b0, 1);// Edge Case 2: All ones
+              
+        test_case(16'hFFFF, 16'hFFFF, 1'b1, 1);// Edge Case 3: All ones with carry in
+                
+        test_case(16'hAAAA, 16'h5555, 1'b0, 1);// Edge Case 4: Carry propagation (alternating bits)
+                
+        test_case(16'hAAAA, 16'h5555, 1'b1, 1);// Edge Case 5: Carry propagation with carry in
+                
+        test_case(16'h0001, 16'h0001, 1'b0, 1);// Edge Case 6: Single bit addition
+                
+        test_case(16'h0001, 16'hFFFE, 1'b1, 1);// Edge Case 7: Maximum carry chain
+                
+        test_case(16'h1234, 16'h4321, 1'b0, 1);// Edge Case 8: No carry generation
+                
+        test_case(16'hA5A5, 16'h5A5A, 1'b1, 1);// Edge Case 9: Random pattern with carry in
+                
+        test_case(16'hF0F0, 16'h0F0F, 1'b0, 1);// Edge Case 10: Mixed pattern
+        
+        $display("\nEdge Cases Summary:");
+        $display("Correct: %0d/10", edge_correct);
+        
+        // Total summary
+        $display("\nFinal Summary:");
+        $display("Random Tests: %0d/50 correct", random_correct);
+        $display("Edge Cases:   %0d/10 correct", edge_correct);
+        $display("Total:        %0d/60 correct", random_correct + edge_correct);
+        $display("Accuracy:     %.2f%%", ((random_correct + edge_correct) * 100.0) / 60);
+        
+        $stop;
+    end
+endmodule
+
+//______________________________________________________________________________
+module mm (
+    input a, b, Cin,
+    output Sum, Cout
+);
+    wire p, g;
+
+    buf(carry_internal, 0);
+    // Propagate and Generate signals
+    xor (p, a, b);
+    and (g, a, b);
+    // Sum generation
+    xor (Sum, p, Cin); // Sum is P XOR Carry-in
+
+    nmos(Cout, Cin, p);
+    pmos(Cout, g, p);
+    
+endmodule
+
+
+module tb;
+    reg a, b;
+    reg Cin;
+    wire Sum;
+    wire Cout;
+
+    mm uut (.a(a), .b(b), .Cin(Cin), .Sum(Sum), .Cout(Cout));
+
+    initial begin
+        $display("Time\t a\t\t b\t\t Cin\t=> Sum\t\t Cout");
+
+        a = 0; b = 0; Cin = 0;
+        #10;
+        $display("%0t\t%h\t%h\t%b\t=> %h\t%b", $time, a, b, Cin, Sum, Cout);
+              a = 0; b = 0; Cin = 01;
+        #10;
+        $display("%0t\t%h\t%h\t%b\t=> %h\t%b", $time, a, b, Cin, Sum, Cout);
+                a = 0; b = 1; Cin = 0;
+        #10;
+        $display("%0t\t%h\t%h\t%b\t=> %h\t%b", $time, a, b, Cin, Sum, Cout);
+                a = 0; b = 1; Cin = 1;
+        #10;
+        $display("%0t\t%h\t%h\t%b\t=> %h\t%b", $time, a, b, Cin, Sum, Cout);
+                a = 1; b = 0; Cin = 0;
+        #10;
+        $display("%0t\t%h\t%h\t%b\t=> %h\t%b", $time, a, b, Cin, Sum, Cout);
+                a = 1; b = 0; Cin = 1;
+        #10;
+        $display("%0t\t%h\t%h\t%b\t=> %h\t%b", $time, a, b, Cin, Sum, Cout);
+                a = 1; b = 1; Cin = 0;
+        #10;
+        $display("%0t\t%h\t%h\t%b\t=> %h\t%b", $time, a, b, Cin, Sum, Cout);
+                a = 1; b = 1; Cin = 1;
+        #10;
+        $display("%0t\t%h\t%h\t%b\t=> %h\t%b", $time, a, b, Cin, Sum, Cout);
+         
+    end
+endmodule
